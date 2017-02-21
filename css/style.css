@@ -3,3 +3,14 @@ h1 {
                 font-family: Monaco, Courier, monospace;
                 color: #618ad2;
 }
+
+p2 {
+				font-size: 20px;
+				font-family: Monaco, Courier, monospace;
+				color: black;
+}
+
+p {
+				font-size: 15px;
+				text-align: right;
+}
