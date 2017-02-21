@@ -1,16 +1,20 @@
-h1 {
-                font-size: 30px;
-                font-family: Monaco, Courier, monospace;
-                color: #618ad2;
+body{
+	font-size: 15px;
 }
 
-h4 {
-				font-size: 20px;
-				font-family: Monaco, Courier, monospace;
-				color: black;
+h1 {
+    font-size: 30px;
+    font-family: Monaco, Courier, monospace;
+    color: #618ad2;
 }
 
 p {
-				font-size: 15px;
-				text-align: right;
+	font-size: 20px;
+	font-family: Monaco, Courier, monospace;
+				color: black;
+}
+
+.pidor {
+	font-size: 10px;
+	text-align: right;
 }
