@@ -1,15 +1,14 @@
 body{
-	font-size: 15px;
+	font-size: 20px;
+	font-family: Monaco, Courier, monospace;
 }
 
 h1 {
     font-size: 30px;
-    font-family: Monaco, Courier, monospace;
     color: #618ad2;
 }
 
 p {
 	font-size: 20px;
-	font-family: Monaco, Courier, monospace;
-				color: black;
+	color: black;
 }
