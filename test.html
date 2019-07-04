@@ -8,16 +8,17 @@
 </head>
 <body>
     <div id="app" style="display:flex; flex-direction:column; align-items: center;">
-        <!-- <h1>{{ message }}</h1>
+        <pre>{{ $data | json }}</pre>
+		<!-- <h1>{{ message }}</h1>
         <input type="text" v-model="message">
-		<pre>{{ $data | json }}</pre>
+		
 		<button v-on:click="addExpert">Добавить эксперта</button>
 		<button v-on:click="delExpert">Удалить эксперта</button>
 		-->
 		<h1>Ахуенный проект</h1>
-		<p>Эксперты: <input type="range" min="1" max="{{ vertexes }}" v-model="experts"></input> {{ experts }}</p>
+		<p>Эксперты: <input type="range" min="1" max="11" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
 		
-		<p>Вершины: <input type="range" min="1" max="11" v-model="vertexes"></input> {{ vertexes }}</p>
+		<p>Вершины: <input type="range" min="1" max="11" v-model.number="vertexes"></input> {{ vertexes }}</p>
 
 
 		<div id="expertsList"></div>
@@ -45,7 +46,7 @@
 		</div>
 	</template>
 	
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 
     <script>
 		Vue.component('counter', {
