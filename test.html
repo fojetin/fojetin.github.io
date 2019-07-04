@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Научка</title>
+	<link rel="shortcut icon" href="https://thumbs.uloz.to/7/4/d/74dda85ec36d883bb4c66a04ae6e5586.640x360.jpg">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div id="app" style="display:flex; flex-direction:column; align-items: center;">
+        <!-- <h1>{{ message }}</h1>
+        <input type="text" v-model="message">
+		<pre>{{ $data | json }}</pre>
+		<button v-on:click="addExpert">Добавить эксперта</button>
+		<button v-on:click="delExpert">Удалить эксперта</button>
+		-->
+		<h1>Ахуенный проект</h1>
+		<p>Эксперты: <input type="range" min="1" max="{{ vertexes }}" v-model="experts"></input> {{ experts }}</p>
+		
+		<p>Вершины: <input type="range" min="1" max="11" v-model="vertexes"></input> {{ vertexes }}</p>
+
+
+		<div id="expertsList"></div>
+		<div style="display:flex; flex-direction:	 row;">
+			<counter v-for="c in $root.experts"></counter>
+		</div>
+		<!-- <counter></counter>
+		<expert></expert> -->
+	</div>
+
+	<template id="counterTemplate">
+		<div style="display:flex; align-items: center; justify-content: space-around; flex-direction:column; border:solid 1px black">
+			<div>{{ pipirka }}</div>
+			<!-- <p><button v-on:click="count++">Счётчик кликов — {{ count }} {{ $root.message }}</button></p> -->
+			<div style="display:flex; align-items: center; justify-content: center;"><i style="font-size:50px" class="material-icons">person</i></div>
+			<ul style="padding:10px">
+				<li style="list-style-type:none;display:flex;flex-direction:center"
+					v-for="(n, index) in $root.vertexes">
+					{{ n }}
+					<button v-if="index>0" style="border-radius:50%" class="material-icons">keyboard_arrow_up</button>
+					<button v-else style="visibility:hidden" class="material-icons">keyboard_arrow_up</button>
+					<button v-if="index<$root.vertexes-1" style="border-radius:50%" class="material-icons">keyboard_arrow_down</button>
+				</li>
+			</ul>
+		</div>
+	</template>
+	
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js"></script>
+
+    <script>
+		Vue.component('counter', {
+			data: function() {
+				return {
+					count: 0,
+					pos: [],
+				}
+			},
+			<!-- computed: {
+			<!--	pipirka: function() {
+			<!--		return $root.vertexes;
+			<!--	},
+			<!--}
+
+			<!-- function() {
+			<!--	return {
+			<!--		pipirka: function() {
+			<!--			return $root.vertexes;
+			<!--		},
+			<!--	}
+			<!--}, -->
+			template: '#counterTemplate'
+		});
+
+		
+        new Vue({
+            el: "#app",
+            data: {
+                message: "Hello world",
+				vertexes: 1,
+				experts: 1,
+				eee: [],
+            },
+			methods: {
+				addExpert: function() {
+					var newExpEl = document.createElement('div');
+					newExpEl.innerHTML = 'Я эксперт!';
+					expertsList.appendChild(newExpEl);
+					this.eee.push({el: newExpEl, vert: [1,2,3]}, );
+				},
+				delExpert: function() {
+					thisExpert = this.eee.pop();
+					if (thisExpert !== undefined) {
+						thisExpert.el.remove();
+					} else {
+						alert("Нет экспертов");
+					}
+					
+				}
+			}
+        })
+    </script>
+</body>
+</html>
