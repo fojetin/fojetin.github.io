@@ -16,14 +16,14 @@
 		<button v-on:click="delExpert">Удалить эксперта</button>
 		-->
 		<h1>Ахуенный проект</h1>
-		<p>Эксперты: <input type="range" min="1" max="11" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
+		<p>Эксперты: <input type="range" min="1" v-bind:max="vertexes" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
 		
 		<p>Вершины: <input type="range" min="1" max="11" v-model.number="vertexes"></input> {{ vertexes }}</p>
 
 
 		<div id="expertsList"></div>
 		<div style="display:flex; flex-direction:	 row;">
-			<counter v-for="c in $root.experts"></counter>
+			<counter v-for="c in $root.experts" v-bind:vertexes="vertexes"></counter>
 		</div>
 		<!-- <counter></counter>
 		<expert></expert> -->
@@ -36,11 +36,11 @@
 			<div style="display:flex; align-items: center; justify-content: center;"><i style="font-size:50px" class="material-icons">person</i></div>
 			<ul style="padding:10px">
 				<li style="list-style-type:none;display:flex;flex-direction:center"
-					v-for="(n, index) in $root.vertexes">
+					v-for="(n, index) in vertexes">
 					{{ n }}
 					<button v-if="index>0" style="border-radius:50%" class="material-icons">keyboard_arrow_up</button>
 					<button v-else style="visibility:hidden" class="material-icons">keyboard_arrow_up</button>
-					<button v-if="index<$root.vertexes-1" style="border-radius:50%" class="material-icons">keyboard_arrow_down</button>
+					<button v-if="index<vertexes-1" style="border-radius:50%" class="material-icons">keyboard_arrow_down</button>
 				</li>
 			</ul>
 		</div>
@@ -56,6 +56,7 @@
 					pos: [],
 				}
 			},
+			props: ['vertexes'],
 			<!-- computed: {
 			<!--	pipirka: function() {
 			<!--		return $root.vertexes;
