@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="app" style="display:flex; flex-direction:column; align-items: center;">
-        <pre>{{ $data | json }}</pre>
+        <!--<pre>{{ $data | json }}</pre>-->
 		<!-- <h1>{{ message }}</h1>
         <input type="text" v-model="message">
 		
@@ -20,28 +20,38 @@
 		
 		<p>Вершины: <input type="range" min="1" max="11" v-model.number="vertexes"></input> {{ vertexes }}</p>
 
+		<button v-on:click="makeExperts" v-if="!kakaha" style="margin-bottom:20px">Построить отряд экспертов</button>
 
-		<div id="expertsList"></div>
-		<div style="display:flex; flex-direction:	 row;">
-			<counter v-for="c in $root.experts" v-bind:vertexes="vertexes"></counter>
+		<!--<div ></div>-->
+		<div id="expertsList" style="display:flex; flex-direction: row;">
+			<!--<counter></counter>-->
+			<counter v-if="kakaha" v-for="c in $root.experts" v-bind:vertexes="vertexes"></counter>
 		</div>
 		<!-- <counter></counter>
 		<expert></expert> -->
 	</div>
 
 	<template id="counterTemplate">
+		
 		<div style="display:flex; align-items: center; justify-content: space-around; flex-direction:column; border:solid 1px black">
-			<div>{{ pipirka }}</div>
+			{{ sequence }} {{ vertexes }} {{ count }}
 			<!-- <p><button v-on:click="count++">Счётчик кликов — {{ count }} {{ $root.message }}</button></p> -->
 			<div style="display:flex; align-items: center; justify-content: center;"><i style="font-size:50px" class="material-icons">person</i></div>
 			<ul style="padding:10px">
 				<li style="list-style-type:none;display:flex;flex-direction:center"
+					v-for="(n, index) in sequence">
+					{{ n }}
+					<button v-if="index > 0" style="border-radius:50%" v-on:click="changePos(index, 'up')" class="material-icons">keyboard_arrow_up</button>
+					<button v-else style="visibility:hidden" class="material-icons">keyboard_arrow_up</button>
+					<button v-if="index < vertexes-1" style="border-radius:50%" v-on:click="changePos(index, 'down')" class="material-icons">keyboard_arrow_down</button>
+				</li>
+				<!--<li style="list-style-type:none;display:flex;flex-direction:center"
 					v-for="(n, index) in vertexes">
 					{{ n }}
 					<button v-if="index>0" style="border-radius:50%" class="material-icons">keyboard_arrow_up</button>
 					<button v-else style="visibility:hidden" class="material-icons">keyboard_arrow_up</button>
 					<button v-if="index<vertexes-1" style="border-radius:50%" class="material-icons">keyboard_arrow_down</button>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 	</template>
@@ -53,23 +63,29 @@
 			data: function() {
 				return {
 					count: 0,
-					pos: [],
+					poss: [],
+					sequence: [],
 				}
 			},
 			props: ['vertexes'],
 			<!-- computed: {
-			<!--	pipirka: function() {
-			<!--		return $root.vertexes;
-			<!--	},
-			<!--}
-
-			<!-- function() {
-			<!--	return {
-			<!--		pipirka: function() {
-			<!--			return $root.vertexes;
-			<!--		},
+			<!--	pos: function() {
+			<!--		return Array.from({length: this.vertexes}, (v, k) => k+1);
 			<!--	}
-			<!--}, -->
+			<!--},
+			methods: {
+				changePos: function(index, direction) {
+					this.sequence.push();
+					if (direction === 'up') {
+						[this.sequence[index], this.sequence[index-1]] = [this.sequence[index-1], this.sequence[index]];
+					} else {
+						[this.sequence[index], this.sequence[index+1]] = [this.sequence[index+1], this.sequence[index]];
+					}
+				}
+			},
+			mounted: function() {
+				this.sequence = Array.from({length: this.vertexes}, (v, k) => k+1);
+			},
 			template: '#counterTemplate'
 		});
 
@@ -78,9 +94,10 @@
             el: "#app",
             data: {
                 message: "Hello world",
-				vertexes: 1,
-				experts: 1,
+				vertexes: 3,
+				experts: 3,
 				eee: [],
+				kakaha: false,
             },
 			methods: {
 				addExpert: function() {
@@ -97,6 +114,17 @@
 						alert("Нет экспертов");
 					}
 					
+				},
+				genArray: function() {
+					return Array.from({length: this.vertexes}, (v, k) => k+1);
+				},
+				makeExperts: function() {
+					this.kakaha = true;
+					console.log(123);
+					var newExpEl = document.createElement('component');
+					newExpEl.setAttribute('is', 'counter	');
+					expertsList.appendChild(newExpEl);
+					this.eee.push({el: newExpEl, vert: [1,2,3]}, );
 				}
 			}
         })
