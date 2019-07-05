@@ -16,9 +16,9 @@
 		<button v-on:click="delExpert">Удалить эксперта</button>
 		-->
 		<h1>Ахуенный проект</h1>
-		<p>Эксперты: <input type="range" min="1" v-bind:max="vertexes" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
+		<p>Эксперты: <input v-if="!kakaha" type="range" min="1" v-bind:max="vertexes" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
 		
-		<p>Вершины: <input type="range" min="1" max="11" v-model.number="vertexes"></input> {{ vertexes }}</p>
+		<p>Вершины: <input v-if="!kakaha" type="range" min="1" max="11" v-model.number="vertexes"></input> {{ vertexes }}</p>
 
 		<button v-on:click="makeExperts" v-if="!kakaha" style="margin-bottom:20px">Построить отряд экспертов</button>
 
