@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Научка</title>
+	<link href="style.css" rel="stylesheet">
 	<link rel="shortcut icon" href="https://thumbs.uloz.to/7/4/d/74dda85ec36d883bb4c66a04ae6e5586.640x360.jpg">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -37,9 +38,9 @@
 			{{ sequence }} {{ vertexes }} {{ count }}
 			<!-- <p><button v-on:click="count++">Счётчик кликов — {{ count }} {{ $root.message }}</button></p> -->
 			<div style="display:flex; align-items: center; justify-content: center;"><i style="font-size:50px" class="material-icons">person</i></div>
-			<ul style="padding:10px">
+			<transition-group name="flip-list" style="padding:10px" tag="ul">
 				<li style="list-style-type:none;display:flex;flex-direction:center"
-					v-for="(n, index) in sequence">
+					v-for="(n, index) in sequence" v-bind:key="n">
 					{{ n }}
 					<button v-if="index > 0" style="border-radius:50%" v-on:click="changePos(index, 'up')" class="material-icons">keyboard_arrow_up</button>
 					<button v-else style="visibility:hidden" class="material-icons">keyboard_arrow_up</button>
@@ -52,7 +53,7 @@
 					<button v-else style="visibility:hidden" class="material-icons">keyboard_arrow_up</button>
 					<button v-if="index<vertexes-1" style="border-radius:50%" class="material-icons">keyboard_arrow_down</button>
 				</li> -->
-			</ul>
+			</transition-group>
 		</div>
 	</template>
 	
