@@ -1,3 +1,12 @@
+body{
+	font-family: Monaco, Courier, monospace;
+}
+
 .flip-list-move {
   transition: transform 1s;
+}
+
+h1 {
+	font-size: 35px;
+    color: #618ad2;
 }
