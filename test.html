@@ -17,6 +17,7 @@
 		<button v-on:click="delExpert">Удалить эксперта</button>
 		-->
 		<h1>Ахуенный проект</h1>
+		{{ globalSequences }}
 		<p>Эксперты: <input v-if="!kakaha" type="range" min="1" v-bind:max="vertexes" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
 		
 		<p>Вершины: <input v-if="!kakaha" type="range" min="1" max="11" v-model.number="vertexes"></input> {{ vertexes }}</p>
@@ -26,7 +27,7 @@
 		<!--<div ></div>-->
 		<div id="expertsList" style="display:flex; flex-direction: row;">
 			<!--<counter></counter>-->
-			<counter v-if="kakaha" v-for="c in $root.experts" v-bind:vertexes="vertexes"></counter>
+			<counter v-if="kakaha" v-for="(c, index) in $root.experts" v-bind:pushsequence="pushsequence" v-bind:i="index" v-bind:vertexes="vertexes"></counter>
 		</div>
 		<!-- <counter></counter>
 		<expert></expert> -->
@@ -68,7 +69,7 @@
 					sequence: [],
 				}
 			},
-			props: ['vertexes'],
+			props: ['vertexes', 'i', 'pushsequence'],
 			<!-- computed: {
 			<!--	pos: function() {
 			<!--		return Array.from({length: this.vertexes}, (v, k) => k+1);
@@ -87,6 +88,9 @@
 			mounted: function() {
 				this.sequence = Array.from({length: this.vertexes}, (v, k) => k+1);
 			},
+			updated: function() {
+				this.pushsequence(this.i, this.sequence);
+			},
 			template: '#counterTemplate'
 		});
 
@@ -97,7 +101,7 @@
                 message: "Hello world",
 				vertexes: 3,
 				experts: 3,
-				eee: [],
+				globalSequences: {},
 				kakaha: false,
             },
 			methods: {
@@ -126,6 +130,9 @@
 					newExpEl.setAttribute('is', 'counter	');
 					expertsList.appendChild(newExpEl);
 					this.eee.push({el: newExpEl, vert: [1,2,3]}, );
+				},
+				pushsequence: function(index, sequence) {
+					this.globalSequences[index](sequence);
 				}
 			}
         })
