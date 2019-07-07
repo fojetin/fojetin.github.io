@@ -10,3 +10,10 @@ h1 {
 	font-size: 35px;
     color: #618ad2;
 }
+
+#sigma-container {
+	margin-top: 10px;
+	height:400px;
+	width: 1000px;
+	background-color:#E1E1E1;
+}
