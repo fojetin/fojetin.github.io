@@ -59,7 +59,8 @@
 		<button v-on:click="addExpert">Добавить эксперта</button>
 		<button v-on:click="delExpert">Удалить эксперта</button>
 		-->
-		<h1>Ахуенный проект</h1>
+		<h1>Дибил</h1>
+		<img src="dibil.jpg">
 		{{ globalSequences }}
 		<p>Эксперты: <input v-if="!kakaha" type="range" min="1" v-bind:max="vertexes" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
 		
@@ -76,7 +77,7 @@
 		<expert></expert> -->
 		
 		<button  v-if="!havenode" v-on:click="addNode()">add node</button>
-		<input v-if="!havegraph" type="number" v-model.number="nodes_count"></input>
+		<input v-if="!havegraph" type="number" v-model.number="nodes_count" placeholder='8'></input>
 		<button v-if="!havegraph" v-on:click="makeGraph(nodes_count)">make Graph</button>
 		
 		<div id='sigma-container'></div>
