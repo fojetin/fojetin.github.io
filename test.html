@@ -76,7 +76,8 @@
 		<expert></expert> -->
 		
 		<button  v-if="!havenode" v-on:click="addNode()">add node</button>
-		<button v-if="!havegraph" v-on:click="makeGraph(8)">make Graph</button>
+		<input v-if="!havegraph" type="number" v-model.number="nodes_count"></input>
+		<button v-if="!havegraph" v-on:click="makeGraph(nodes_count)">make Graph</button>
 		
 		<div id='sigma-container'></div>
 	</div>
