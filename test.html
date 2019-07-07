@@ -5,7 +5,50 @@
     <title>Научка</title>
 	<link href="css/test.css" rel="stylesheet">
 	<link rel="shortcut icon" href="https://thumbs.uloz.to/7/4/d/74dda85ec36d883bb4c66a04ae6e5586.640x360.jpg">
+	
+	<!-- Icons -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	
+	<!-- Sigma JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/sigma.core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/conrad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/utils/sigma.utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/utils/sigma.polyfills.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/sigma.settings.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.dispatcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.configurable.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.graph.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.camera.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.quad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.edgequad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/captors/sigma.captors.mouse.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/captors/sigma.captors.touch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.webgl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.svg.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.curve.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.arrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.curvedArrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.extremities.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/middlewares/sigma.middlewares.rescale.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/middlewares/sigma.middlewares.copy.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.animation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.bindEvents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.bindDOMEvents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.drawHovers.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/settings.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curve.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curvedArrow.js"></script>
 </head>
 <body>
     <div id="app" style="display:flex; flex-direction:column; align-items: center;">
@@ -31,6 +74,11 @@
 		</div>
 		<!-- <counter></counter>
 		<expert></expert> -->
+		
+		<button  v-if="!havenode" v-on:click="addNode()">add node</button>
+		<button v-if="!havegraph" v-on:click="makeGraph(8)">make Graph</button>
+		
+		<div id='sigma-container'></div>
 	</div>
 
 	<template id="counterTemplate">
@@ -58,9 +106,13 @@
 		</div>
 	</template>
 	
+	<!-- Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 
     <script>
+		Number.prototype.toRad = function () { return this * Math.PI / 180; }
+	
+		<!-- Vue code -->
 		Vue.component('counter', {
 			data: function() {
 				return {
@@ -103,6 +155,8 @@
 				experts: 3,
 				globalSequences: {},
 				kakaha: false,
+				havegraph: 0,
+				havenode: 0
             },
 			methods: {
 				addExpert: function() {
@@ -122,6 +176,7 @@
 				},
 				genArray: function() {
 					return Array.from({length: this.vertexes}, (v, k) => k+1);
+					this.havenode = 1;
 				},
 				makeExperts: function() {
 					this.kakaha = true;
@@ -133,9 +188,94 @@
 				},
 				pushsequence: function(index, sequence) {
 					this.globalSequences[index](sequence);
+				},
+				addNode: function() {
+					s.graph.read(
+						{
+							nodes: [
+								{ id: "n0", label: "A node", x: 0, y: 0, size: 2, color: '#008cc2' }
+							]
+						}
+					);
+					s.refresh();
+					this.havenode = 1;
+				},
+				makeGraph: function(n_count) {
+					degree = 360 / n_count;
+					radius = 50;
+					
+					for (var i = 0; i < n_count; i++) {
+						X = Math.cos((degree * i).toRad()) * radius;
+						Y = Math.sin((degree * i).toRad()) * radius;
+						s.graph.read(
+							{
+								nodes: [
+									{ id: i, label: i + " node", x: X, y: Y, size: 1, color: '#008cc2' },
+								],
+								
+							}
+						);
+					}
+					s.refresh();
+					for (var i = 0; i < n_count; i++) {
+						source = i;
+						if (i+1 == n_count) {
+							target = 0;
+						} else {
+							target = i + 1;
+						}
+						s.graph.read(
+							{
+								edges: [
+									{ id: "e"+i, source: source, target: target, label: i, color: '#FF0000', type:'arrow', size:3}
+								],
+								
+							}
+						);
+					}
+					
+					s.refresh();
+					this.havegraph = 1;
 				}
 			}
-        })
+        });
+		
+		<!-- Sigma code -->
+		var s = new sigma(
+			{
+			renderer: {
+			  container: document.getElementById('sigma-container'),
+			  type: 'canvas'
+			},
+			settings: {
+				minEdgeSize: 0.1,
+				maxEdgeSize: 2,
+				minNodeSize: 1,
+				maxNodeSize: 8,
+				minArrowSize: 8,
+				edgeLabelSize: 'proportional',
+				}
+			}
+		);
+
+		// Create a graph object
+		var graph = {
+			nodes: [
+				<!-- { id: "n1", label: "Another node", x: 3, y: 1, size: 2, color: '#008cc2' },
+				<!-- { id: "n2", label: "And a last one", x: 1, y: 3, size: 1, color: '#E57821' },
+			],
+			edges: [
+				<!-- { id: "e0", source: "n0", target: "n1", color: '#282c34', type:'line', size:0.5 },
+				<!-- { id: "e1", source: "n1", target: "n2", color: '#282c34', type:'curve', size:1},
+				<!-- { id: "e2", source: "n2", target: "n0", label: "Edge", color: '#FF0000', type:'curvedArrow', size:2}
+			]
+		};
+
+		// Load the graph in sigma
+		s.graph.read(graph);
+		// Ask sigma to draw it
+		s.refresh();
+		
     </script>
 </body>
 </html>
