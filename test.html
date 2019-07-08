@@ -54,14 +54,14 @@
     <div id="app" style="display:flex; flex-direction:column; align-items: center;">
         <!--<pre>{{ $data | json }}</pre>-->
 		<!-- <h1>{{ message }}</h1>
-        <input type="text" v-model="message">
+        
 		
 		<button v-on:click="addExpert">Добавить эксперта</button>
 		<button v-on:click="delExpert">Удалить эксперта</button>
 		-->
 		<h1>Дибил</h1>
 		<img src="dibil.JPG">
-		{{ globalSequences }}
+		<h2>{{ globalSequences }}</h2>
 		<p>Эксперты: <input v-if="!kakaha" type="range" min="1" v-bind:max="vertexes" max-range="vertexes" v-model.number="experts"></input> {{ experts }}</p>
 		
 		<p>Вершины: <input v-if="!kakaha" type="range" min="1" max="11" v-model.number="vertexes"></input> {{ vertexes }}</p>
@@ -71,7 +71,7 @@
 		<!--<div ></div>-->
 		<div id="expertsList" style="display:flex; flex-direction: row;">
 			<!--<counter></counter>-->
-			<counter v-if="kakaha" v-for="(c, index) in $root.experts" v-bind:pushsequence="pushsequence" v-bind:i="index" v-bind:vertexes="vertexes"></counter>
+			<counter v-if="kakaha" v-for="(c, index) in $root.experts" :pushsequence="pushsequence" v-bind:i="index" v-bind:vertexes="vertexes"></counter>
 		</div>
 		<!-- <counter></counter>
 		<expert></expert> -->
@@ -120,15 +120,10 @@
 				return {
 					count: 0,
 					poss: [],
-					sequence: [],
+					sequence: [1],
 				}
 			},
 			props: ['vertexes', 'i', 'pushsequence'],
-			<!-- computed: {
-			<!--	pos: function() {
-			<!--		return Array.from({length: this.vertexes}, (v, k) => k+1);
-			<!--	}
-			<!--},
 			methods: {
 				changePos: function(index, direction) {
 					this.sequence.push();
@@ -137,19 +132,22 @@
 					} else {
 						[this.sequence[index], this.sequence[index+1]] = [this.sequence[index+1], this.sequence[index]];
 					}
-				}
+				},
+				updt: function(index) {
+					this.pushsequence(index, this.sequence);
+				},
 			},
 			mounted: function() {
 				this.sequence = Array.from({length: this.vertexes}, (v, k) => k+1);
 			},
-			updated: function() {
-				this.pushsequence(this.i, this.sequence);
-			},
+			updated: function(index) {
+					this.pushsequence(this.i, this.sequence);
+				},
 			template: '#counterTemplate'
 		});
 
 		
-        new Vue({
+        var vm = new Vue({
             el: "#app",
             data: {
                 message: "Hello world",
@@ -158,14 +156,15 @@
 				globalSequences: {},
 				kakaha: false,
 				havegraph: 0,
-				havenode: 0
+				havenode: 0,
+				nodes_count: 5,
             },
 			methods: {
 				addExpert: function() {
 					var newExpEl = document.createElement('div');
 					newExpEl.innerHTML = 'Я эксперт!';
 					expertsList.appendChild(newExpEl);
-					this.eee.push({el: newExpEl, vert: [1,2,3]}, );
+					// this.eee.push({el: newExpEl, vert: [1,2,3]}, );
 				},
 				delExpert: function() {
 					thisExpert = this.eee.pop();
@@ -189,7 +188,8 @@
 					this.eee.push({el: newExpEl, vert: [1,2,3]}, );
 				},
 				pushsequence: function(index, sequence) {
-					this.globalSequences[index](sequence);
+					Vue.set(this.globalSequences, index, sequence);
+					// this.globalSequences[index] = sequence;
 				},
 				addNode: function() {
 					s.graph.read(
